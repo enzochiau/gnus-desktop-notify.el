@@ -302,8 +302,11 @@ the behavior defined by `gnus-desktop-notify-behavior'."
                         name)
                       (- count old-count))
 		    updated-groups))))))))
-    (when (and updated-groups (not (called-interactively-p 'any)))
-      (funcall gnus-desktop-notify-function updated-groups))))
+    (if updated-groups
+        (funcall gnus-desktop-notify-function updated-groups)
+      (alert "No news is good news"
+             :title "Gnus"
+             :style 'notifications))))
 
 
 (provide 'gnus-desktop-notify)
